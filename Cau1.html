@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 1</title>
+</head>
+<body>
+    <p>Nhập dãy gồm các số nguyên không quá 50 phần tử, giữa các số được ngăn cách bởi 1 dấu phẩy</p>
+    <label>
+        <input type="text" id="input1">
+    </label> <br><br>
+    <button type="button" id="button1">Tính trung bình</button>
+    <p id="result"></p>
+    <script>
+        let input1 = document.getElementById("input1");
+        let button1 = document.getElementById("button1");
+        let result = document.getElementById("result");
+        
+        function average(arr) {
+            let total = 0;
+            let count = 0;
+            for (let i = 0; i < arr.length; i ++) {
+                if (arr[i] % 3 === 0) {
+                    total += arr[i];
+                    count ++;
+                }
+            }
+            
+            return count === 0 ? 0 : total / count;
+        }
+        
+        function calculate() {
+            let strs = input1.value.split(",");
+            let arr = [];
+            if (strs.length > 50) {
+                alert("Dãy số không được vượt quá 50 phần tử");
+                return;
+            }
+            for (let i = 0; i < strs.length; i++) {
+                let num = Number(strs[i]);
+                if (isNaN(num) || strs[i] === "") {
+                    alert("Không phải dãy số nguyên, vui lòng nhập lại");
+                    return;
+                }
+                arr.push(num);
+            }
+            let ave = average(arr);
+            result.innerHTML = `Dãy số nguyên: ${arr.join(",")} <br>
+            Giá trị trung bình của tổng các số chia hết cho 3: ${ave}`;
+        }
+        
+        button1.addEventListener("click", calculate);
+        
+    </script>
+</body>
+</html>
