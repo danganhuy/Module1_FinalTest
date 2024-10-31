@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 3</title>
+</head>
+<body>
+    <p>Nhập tháng năm theo định dạng MM/yyyy</p>
+    <label>
+        <input type="text" id="input1">
+    </label> <br><br>
+    <button type="button" id="button1">Submit</button>
+    <p id="result"></p>
+    <script>
+        let input1 = document.getElementById("input1");
+        let button1 = document.getElementById("button1");
+        let result = document.getElementById("result");
+        
+        function isLeapYear(year) {
+            if (year % 400 === 0)
+                return true;
+            else if (year % 100 === 0)
+                return false;
+            else return year % 4 === 0;
+        }
+        
+        function daysOfTheYear(month, year) {
+            switch (month) {
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                    return 31;
+                case 4: case 6: case 9: case 11:
+                    return 30;
+                case 2:
+                    return isLeapYear(year) ? 29 : 28;
+                default:
+                    return null;
+            }
+        }
+        
+        function submit() {
+            let strs = input1.value.split("/");
+            let month = Number(strs[0]);
+            let year = Number(strs[1]);
+            if (month < 1 || month > 12  || month !== parseInt(strs[0]) || strs[0].length !== 2) {
+                alert("Tháng năm nhập không hợp lệ");
+                return;
+            }
+            if (year < 0 || year > 9999  || year !== parseInt(strs[1]) || strs[1].length !== 4) {
+                alert("Tháng năm nhập không hợp lệ");
+                return;
+            }
+            let day = daysOfTheYear(month,year);
+            result.innerHTML = `Tháng ${month} năm ${year} có ${day} ngày`;
+        }
+        
+        button1.addEventListener("click", submit);
+    
+    </script>
+</body>
+</html>
