@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 4</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-left: 50%;
+            margin-top: 100px;
+            transform: translate(-50%,0);
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 3px 20px 3px 5px;
+        }
+        th {
+            background-color: rgba(255, 118, 118, 0.75);
+        }
+        tr:nth-child(odd) {
+            background-color: rgba(161, 180, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption><h2>Quản lý công nhân</h2></caption>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Lương</th>
+                <th>Chức vụ</th>
+            </tr>
+        </thead>
+        <tbody id="employeeList">
+        
+        </tbody>
+    </table>
+    <script>
+        let elementList = document.getElementById("employeeList");
+        
+        class Employee {
+            constructor(name,birthday,address,wage,title) {
+                this.name = name;
+                this.birthday = birthday;
+                this.address = address;
+                this.wage = wage;
+                this.title = title;
+            }
+            static swapByName(a,b) {
+                console.log(`${a.wage}-${b.wage}`);
+                if (a.wage < b.wage) {
+                    let temp = a;
+                    a = b;
+                    b = temp;
+                    console.log(`${a.wage}-${b.wage}sss`);
+                    return true;
+                }
+                return false;
+            }
+        }
+        
+        function sortEmployee(employees) {
+            let n = employees.length;
+            for (let i = 1; i <  n; i ++) {
+                for (let j = i; j > 0; j --) {
+                    if (employees[j-1].name > employees[j].name) {
+                        let temp = employees[j-1];
+                        employees[j-1] = employees[j];
+                        employees[j] = temp;
+                    }
+                    else
+                        break;
+                }
+            }
+        }
+        
+        function displayEmployeeList(employees) {
+            let s = "";
+            for (let i = 0; i < employees.length; i ++) {
+                s += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${employees[i].name}</td>
+                    <td>${employees[i].birthday}</td>
+                    <td>${employees[i].address}</td>
+                    <td>${employees[i].wage}</td>
+                    <td>${employees[i].title}</td>
+                </tr>`
+            }
+            elementList.innerHTML = s;
+        }
+        
+        let employees = [];
+        employees.push(new Employee("Nguyễn Hà B", "11/05/1996", "Quảng Ninh", "5000", "Nhân viên"));
+        employees.push(new Employee("Trương Tiến H", "05/09/1994", "Hải Phòng", "5500", "Nhân viên"));
+        employees.push(new Employee("Bùi Hoài A", "04/03/1990", "Bắc Ninh", "15000", "Quản lý"));
+        employees.push(new Employee("Trần Tuấn D", "29/02/2000", "Hà Nội", "4900", "Nhân viên"));
+        employees.push(new Employee("Nguyễn Văn T", "22/10/1993", "Đà Nẵng", "6700", "Nhân viên"));
+        employees.push(new Employee("Đặng Văn L", "02/4/1995", "Hạ Long", "6200", "Nhân viên"));
+        
+        sortEmployee(employees);
+        
+        displayEmployeeList(employees);
+        
+    </script>
+</body>
+</html>
