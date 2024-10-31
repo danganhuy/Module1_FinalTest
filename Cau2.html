@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 2</title>
+</head>
+<body>
+    <p>Nhập 1 số nguyên dương</p>
+    <label>
+        <input type="text" id="input1">
+    </label> <br><br>
+    <button type="button" id="button1">Submit</button>
+    <p id="result"></p>
+    <script>
+        let input1 = document.getElementById("input1");
+        let button1 = document.getElementById("button1");
+        let result = document.getElementById("result");
+        
+        function isPerfectNumber(a) {
+            let total = 0;
+            for (let i = 1; i < a; i ++) {
+                if (a % i === 0) {
+                    total += i;
+                }
+            }
+            return a === total;
+        }
+        
+        function submit() {
+            let input = input1.value;
+            if (input === "" ||
+                parseInt(input) !== parseFloat(input) ||
+                isNaN(Number(input))) {
+                alert("Vui lòng nhập số nguyên dương");
+                return;
+            }
+            let a = parseInt(input);
+            let bl = isPerfectNumber(a);
+            if (bl) {
+                result.innerHTML = `${a} là số hoàn bảo`;
+            }
+            else
+                result.innerHTML = `${a} không là số hoàn bảo`;
+        }
+        
+        button1.addEventListener("click", submit);
+        
+    </script>
+</body>
+</html>
